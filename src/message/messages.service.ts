@@ -52,16 +52,26 @@ export class MessagesService {
       );
     }
 
-    const receiver =
-      await this.userRepository.findOne({
+    const [sender, receiver] = await Promise.all([
+      this.userRepository.findOne({
+        where: {
+          id: senderId,
+        },
+        select: {
+          id: true,
+          name: true,
+          username: true,
+        },
+      }),
+      this.userRepository.findOne({
         where: {
           id: receiverId,
         },
-
         select: {
           id: true,
         },
-      });
+      }),
+    ]);
 
     if (!receiver) {
       throw new NotFoundException(
@@ -92,6 +102,8 @@ export class MessagesService {
     return {
       id: savedMessage.id,
       senderId: savedMessage.senderId,
+      senderName: sender?.name || 'New Message',
+      senderUsername: sender?.username || '',
       receiverId: savedMessage.receiverId,
       content: cleanContent,
       seenAt: savedMessage.seenAt,

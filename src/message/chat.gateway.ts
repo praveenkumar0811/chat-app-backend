@@ -181,6 +181,18 @@ export class ChatGateway
           message,
         );
 
+      this.server
+        .to(
+          `user:${client.data.userId}`,
+        )
+        .to(
+          `user:${body.receiverId}`,
+        )
+        .emit(
+          'new-message',
+          message,
+        );
+
       return {
         success: true,
         message,
