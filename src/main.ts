@@ -8,7 +8,7 @@ async function bootstrap() {
 
   // 1. Enable CORS for frontend (port 3000)
   app.enableCors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://chat-app-frontend-nnw2g8bsf-tst-a4ef.vercel.app'],
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://chat-app-frontend-nnw2g8bsf-tst-a4ef.vercel.app', 'https://chat-app-frontend-5irh5swvj-tst-a4ef.vercel.app'],
     credentials: true,
   });
 
